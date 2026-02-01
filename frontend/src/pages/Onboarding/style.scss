@@ -1,0 +1,270 @@
+// ! STEP STEYLES
+@use "../../index.scss" as *;
+
+@mixin glassEffect {
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  background: rgba(86, 122, 136, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+#onboarding {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.onboarding-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(4px);
+  z-index: 0;
+}
+
+.onboarding-content {
+  max-width: 754px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.onboarding-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  position: relative;
+  margin: 0 auto;
+  color: #fff;
+  @include glassEffect;
+  border-radius: 12px;
+}
+
+.back-home-badge {
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.step-progress {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.indicator-content {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.step-indicator {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-bar {
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.25);
+  transition: background-color 0.3s ease;
+
+  &.active {
+    background-color: $yellow-color;
+  }
+}
+
+.step-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s ease;
+
+  &.active {
+    color: $yellow-color-text;
+  }
+}
+
+.counter {
+  font-size: 0.8rem;
+  margin-top: 5px;
+  margin-bottom: 1rem;
+  color: #ffffffa2;
+}
+
+// Step content area
+.step-content {
+  width: 100%;
+  min-height: 200px;
+}
+
+.step-navigation {
+  margin-top: 2rem;
+  width: 100%;
+
+  .btn {
+    padding: 10px 3rem;
+  }
+}
+
+.step-navigation .prev-button-content {
+  float: left;
+  margin-left: 10px;
+
+  button {
+    border: 2px solid #8c8b8b !important;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #8c8b8b !important;
+    }
+  }
+}
+
+.step-navigation .next-button-content {
+  float: right;
+  margin-right: 10px;
+}
+
+.step-navigation .finish-button button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: .2s all;
+
+  &:hover {
+    background-color:  #ac7b3e!important;
+  }
+}
+
+.travel-option-content {
+  display: grid;
+  margin-top: 30px;
+  grid-template-columns: 50% 50%;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.travel-option {
+  border-radius: 14px;
+  user-select: none;
+  border: 3px solid transparent;
+}
+
+.travel-option.active {
+  border: 3px solid $yellow-color;
+}
+
+.travel-option-content .travel-opt-btn img {
+  width: 50px;
+  transform: translateY(3px);
+  user-select: none;
+}
+
+.counter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+}
+
+.counter-content .counter-item {
+  display: none;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+
+    &.active {
+    display: flex;
+  }
+}
+
+.counter-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.counter-controls .counter-btn {
+  gap: 1rem;
+  width: 30px;
+  height: 30px;
+  background: $yellow-color;
+  font-size: 1.2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+}
+
+.counter-controls .counter-value {
+  font-size: 1rem;
+  padding: 0.3rem 2rem;
+  min-width: 20px;
+  border-radius: 12px;
+  border: 2px solid $yellow-color;
+  text-align: center;
+}
+
+// Responsive
+@media (max-width: 991px) {
+  .onboarding-content {
+    padding: 2rem 1rem;
+    width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .onboarding-content {
+    width: 98%;
+    margin-top: 100px;
+  }
+
+  .step-progress {
+    gap: 8px;
+  }
+
+  .step-label {
+    font-size: 0.65rem;
+  }
+
+  .travel-option-content .travel-opt-btn img {
+    width: 40px;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .onboarding-content{
+    width: 98%;
+  }
+  .onboarding-container {
+    padding: 1.5rem 1rem;
+  }
+  
+}

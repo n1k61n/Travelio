@@ -1,0 +1,26 @@
+import { createContext, useContext, useState } from "react";
+
+const OnboardingContext = createContext();
+
+export const OnboardingProvider = ({ children }) => {
+  const [onboardingData, setOnboardingData] = useState({
+    journeyId: null,         // journey ID from backend
+    travelStyle: null,       // step 1
+    travelCompanion: null,   // step 2: example { type, adults, children }
+    travelInterest: [],      // step 3
+    budgetOption: null,      // step 4: "Basic" | "Standard" | "Luxury"
+    tripDays: null,          // step 4: number of days
+  });
+
+  const updateData = (field, value) => {
+    setOnboardingData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <OnboardingContext.Provider value={{ onboardingData, updateData }}>
+      {children}
+    </OnboardingContext.Provider>
+  );
+};
+
+export const useOnboarding = () => useContext(OnboardingContext);
