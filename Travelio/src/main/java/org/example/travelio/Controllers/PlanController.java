@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.example.travelio.DTO.Response.PlanResponse;
-import org.example.travelio.Services.TripPlanService;
+import org.example.travelio.Services.PlanService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanController {
 
-    private final TripPlanService tripPlanService;
+    private final PlanService planService;
 
     @Operation(
             summary = "Get trip plan",
@@ -32,6 +32,6 @@ public class PlanController {
 
     @GetMapping
     public List<PlanResponse> getYourPlan() {
-        return tripPlanService.getPlan();
+        return planService.getPlan();
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TripPlanService {
+public class PlanService {
 
     private static final String GOOGLE_IMAGES_BASE =
             "https://www.google.com/search?tbm=isch&q=";
