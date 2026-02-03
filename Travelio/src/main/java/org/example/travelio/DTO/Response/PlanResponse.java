@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PlanItemResponse {
+public class PlanResponse {
 
     private String placeName;
     private String cityName;
