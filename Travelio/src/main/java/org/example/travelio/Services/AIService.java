@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class AIService {
@@ -106,6 +108,36 @@ public class AIService {
         } catch (Exception e) {
             System.err.println("Xəta baş verdi: " + e.getMessage());
             throw new RuntimeException("Could not generate trip plan. Please try again.");
+        }
+    }
+
+    public  void enrichPlanWithExploreUrls(Map<String, Object> plan) {
+        List<Map<String, Object>> days = (List<Map<String, Object>>) plan.get("days");
+        if (days == null) return;
+
+        for (Map<String, Object> day : days) {
+            String city = day.get("city") != null ? day.get("city").toString() : "";
+
+            List<Map<String, Object>> activities = (List<Map<String, Object>>) day.get("activities");
+            if (activities == null) continue;
+
+            for (Map<String, Object> activity : activities) {
+                String placeName = activity.get("place_name") != null ? activity.get("place_name").toString().trim() : "";
+
+                // city_name həmişə olsun (boş olsa belə)
+                activity.put("city_name", city);
+
+                if (placeName.isEmpty()) {
+                    // place_name mandatory rule
+                    throw new IllegalArgumentException("place_name is missing for an activity");
+                }
+
+                String query = (placeName + " " + city + " Azerbaijan images").trim();
+                String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
+                String exploreUrl = "https://www.google.com/search?tbm=isch&q=" + encodedQuery;
+
+                activity.put("explore_url", exploreUrl);
+            }
         }
     }
 }

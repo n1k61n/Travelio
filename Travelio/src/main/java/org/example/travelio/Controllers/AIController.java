@@ -42,4 +42,16 @@ public class AIController {
                     .body(Map.of("error", "Could not generate trip plan. Please try again."));
         }
     }
+
+
+    @PostMapping("/enrich-plan")
+    public ResponseEntity<?> enrichPlan(@RequestBody Map<String, Object> plan) {
+        try {
+            aiService.enrichPlanWithExploreUrls(plan);
+            return ResponseEntity.ok(plan);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
 }
